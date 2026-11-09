@@ -1,0 +1,7 @@
+"use client";
+import {useState,useEffect} from "react";
+import {Menu,X} from "lucide-react";
+import {cn} from "@/lib/utils";
+interface NavbarProps{className?:string}
+const links=[['About','#event-details'],['Learn','#what-you-learn'],['Speakers','#speakers'],['Agenda','#agenda'],['Tickets','#tickets']];
+export default function Navbar({className}:NavbarProps){const [open,setOpen]=useState(false);useEffect(()=>{const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')setOpen(false)};window.addEventListener('keydown',onKey);return()=>window.removeEventListener('keydown',onKey)},[]);return <header className={cn("forge-navbar",className)}><a className="forge-brand" href="#top" aria-label="FORGE home"><span className="mark" aria-hidden="true"/>FORGE</a><nav className="forge-desktop-links" aria-label="Main navigation">{links.map(([label,href])=><a key={label} href={href}>{label}</a>)}</nav><a className="primary-button forge-register" href="#registration">Register</a><button className="forge-menu-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="forge-mobile-nav" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>{open&&<nav className="forge-mobile-links" id="forge-mobile-nav" aria-label="Mobile navigation">{[...links,['Register','#registration']].map(([label,href])=><a key={label} href={href} onClick={()=>setOpen(false)}>{label}</a>)}</nav>}</header>}

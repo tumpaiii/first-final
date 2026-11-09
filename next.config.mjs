@@ -1,0 +1,1 @@
+const config={output:process.env.SITE_EXPORT==="1"?"export":undefined,images:{unoptimized:true},webpack(config){config.module.rules.push({test:/\.mp4$/i,type:"asset/resource",generator:{filename:"static/media/[name].[contenthash][ext]"}});return config}};export default config;
